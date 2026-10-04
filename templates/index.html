@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Language Translation Tool</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Header -->
+        <header class="header">
+
+            <div class="logo">
+                🌍
+            </div>
+
+            <h1>Language Translation Tool</h1>
+
+            <p>
+                Translate text quickly and easily between multiple languages.
+            </p>
+
+        </header>
+
+
+        <!-- Translation Card -->
+        <main class="translation-card">
+
+            <!-- Language Selection -->
+            <div class="language-section">
+
+                <div class="language-box">
+
+                    <label for="sourceLanguage">
+                        Source Language
+                    </label>
+
+                    <select id="sourceLanguage">
+
+                        {% for name, code in languages.items() %}
+
+                        <option value="{{ code }}"
+                            {% if code == "en" %}selected{% endif %}>
+                            {{ name }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+                <!-- Swap Button -->
+                <button
+                    id="swapButton"
+                    class="swap-button"
+                    title="Swap languages">
+
+                    🔄
+
+                </button>
+
+
+                <div class="language-box">
+
+                    <label for="targetLanguage">
+                        Target Language
+                    </label>
+
+                    <select id="targetLanguage">
+
+                        {% for name, code in languages.items() %}
+
+                        <option value="{{ code }}"
+                            {% if code == "te" %}selected{% endif %}>
+                            {{ name }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- Text Input -->
+            <div class="text-section">
+
+                <label for="inputText">
+                    ✍️ Enter your text
+                </label>
+
+                <textarea
+                    id="inputText"
+                    placeholder="Type or paste your text here..."></textarea>
+
+                <div class="text-info">
+
+                    <span id="characterCount">
+                        Characters: 0
+                    </span>
+
+                    <button id="clearButton" class="clear-button">
+                        🧹 Clear
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Translate Button -->
+            <button id="translateButton" class="translate-button">
+
+                🌐 Translate
+
+            </button>
+
+
+            <!-- Loading -->
+            <div id="loading" class="loading hidden">
+
+                <div class="spinner"></div>
+
+                <span>Translating...</span>
+
+            </div>
+
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message hidden"></div>
+
+
+            <!-- Translation Result -->
+            <div id="resultSection" class="result-section hidden">
+
+                <div class="result-header">
+
+                    <h2>
+                        📝 Translation
+                    </h2>
+
+                    <div class="result-actions">
+
+                        <button
+                            id="copyButton"
+                            class="action-button"
+                            title="Copy translation">
+
+                            📋 Copy
+
+                        </button>
+
+                        <button
+                            id="speakButton"
+                            class="action-button"
+                            title="Listen to translation">
+
+                            🔊 Listen
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="translatedText"
+                    class="translated-text">
+                </div>
+
+            </div>
+
+
+            <!-- History -->
+            <div id="historySection" class="history-section hidden">
+
+                <div class="history-header">
+
+                    <h2>
+                        📚 Translation History
+                    </h2>
+
+                    <button
+                        id="clearHistoryButton"
+                        class="clear-history-button">
+
+                        🗑️ Clear History
+
+                    </button>
+
+                </div>
+
+                <div id="historyList"></div>
+
+            </div>
+
+        </main>
+
+
+        <!-- Footer -->
+        <footer class="footer">
+
+            <p>
+                🌍 Language Translation Tool
+            </p>
+
+            <p>
+                Built with Python, Flask, HTML, CSS & JavaScript
+            </p>
+
+        </footer>
+
+    </div>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
